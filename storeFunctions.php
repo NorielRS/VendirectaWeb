@@ -117,6 +117,49 @@
         }
 
 
+         public function editProduct(){ 
+            if (isset($_POST['editProduct'])) {
+                
+                $vendorId = $_POST['vendorId'];
+                $productName = $_POST['productName'];
+                $productType = $_POST['productType']; 
+                $stockNum = $_POST['stockNum'];
+                $productQuantity = $_POST['productQuantity'];
+                $price = $_POST['price'];
+                // $description = $_POST['description'];
+
+               if ($this->check_product_exists($productName) > 0) {
+                    echo "Product already exists.";
+                } else {
+                    $connection = $this->openConnection();
+                    $stmt = $this->connection->prepare("INSERT INTO products (vendor_id, product_name, product_type, stock_num, quantity_type, price) 
+                                                        VALUES (?,?,?,?,?,?)");
+                
+                    $stmt->execute([ 
+                        $vendorId,
+                        $productName,
+                        $productType,
+                        $stockNum,
+                        $productQuantity,
+                        $price
+                    ]);
+
+                    $result = $stmt->rowCount();
+
+                    if ($result > 0) {
+                        echo "Product added successfully!";
+                    } else {
+                        echo "Error adding product.";
+                    }
+
+                    $this->closeConnection();
+                }
+            }
+
+        }
+
+
+
 
 
 
