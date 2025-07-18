@@ -126,14 +126,14 @@
                 $price = $_POST['price'];
                 // $description = $_POST['description'];
 
-                
+                try{
                     $connection = $this->openConnection();
                     $stmt = $this->connection->prepare("UPDATE products SET stock_num = :stock_num, price = :price WHERE product_id = product_id");
                 
                     $stmt->execute([ 
                         'stock_num'=>$stockNum,
                         'price'=>$price,
-                        'product_id'=>$productId,
+                        'product_id'=>$productId
                     ]);
 
                     $result = $stmt->rowCount();
@@ -146,13 +146,16 @@
 
                     $this->closeConnection();
 
-               
+                }catch (PDOException $e) {
+                echo "Connection failed: " . $e->getMessage();
                 echo '<br>';
                 echo 'PRODUCT ID: '.$productId;
                 echo '<br>';
+                echo 'STOCK: '.$stockNum;
+                echo '<br>';
                 echo 'PRICE: '.$price;
 
-            
+            }
                 
                
                 
