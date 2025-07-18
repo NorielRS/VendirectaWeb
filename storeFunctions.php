@@ -117,43 +117,49 @@
         }
 
 
-         public function editProduct(){ 
+        public function editProduct(){ 
+
             if (isset($_POST['editProduct'])) {
-                
-                $vendorId = $_POST['vendorId'];
-                $productName = $_POST['productName'];
-                $productType = $_POST['productType']; 
+
+                $productId = $_POST['productId'];
                 $stockNum = $_POST['stockNum'];
-                $productQuantity = $_POST['productQuantity'];
                 $price = $_POST['price'];
                 // $description = $_POST['description'];
 
-               if ($this->check_product_exists($productName) > 0) {
-                    echo "Product already exists.";
-                } else {
+                
                     $connection = $this->openConnection();
-                    $stmt = $this->connection->prepare("INSERT INTO products (vendor_id, product_name, product_type, stock_num, quantity_type, price) 
-                                                        VALUES (?,?,?,?,?,?)");
+                    $stmt = $this->connection->prepare("UPDATE products SET stock_num = :stock_num, price = :price WHERE product_id = product_id");
                 
                     $stmt->execute([ 
-                        $vendorId,
-                        $productName,
-                        $productType,
-                        $stockNum,
-                        $productQuantity,
-                        $price
+                        'stock_num'=>$stockNum,
+                        'price'=>$price,
+                        'product_id'=>$productId,
                     ]);
 
                     $result = $stmt->rowCount();
 
                     if ($result > 0) {
-                        echo "Product added successfully!";
+                        echo "Product edited successfully!";
                     } else {
-                        echo "Error adding product.";
+                        echo "Error editing product.";
                     }
 
                     $this->closeConnection();
-                }
+
+               
+                echo '<br>';
+                echo 'PRODUCT ID: '.$productId;
+                echo '<br>';
+                echo 'PRICE: '.$price;
+
+            
+                
+               
+                
+            }
+            else{
+                echo "This is not running";
+
             }
 
         }
