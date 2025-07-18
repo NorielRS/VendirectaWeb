@@ -4,8 +4,6 @@ $id = $_GET['id'];
 $singleProduct = $store->getSingleProduct($id);
 $store->editProduct($_POST);
 
-echo '<br>';
-echo $id;
     
 ?>
 
@@ -20,7 +18,7 @@ echo $id;
     <h1>Edit Product Details</h1>
     <form method="post">
 
-        <h4><?php echo htmlspecialchars($singleProduct['product_name']); ?> </h4> 
+        <h3><?php echo htmlspecialchars($singleProduct['product_name']); ?> </h3> 
        
 
         <p>Product ID: <?php echo htmlspecialchars($singleProduct['product_id']); ?></p>
