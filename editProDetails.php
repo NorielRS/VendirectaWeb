@@ -2,6 +2,10 @@
 require_once 'storeFunctions.php';
 $id = $_GET['id'];
 $singleProduct = $store->getSingleProduct($id);
+$store->editProduct($_POST);
+
+echo '<br>';
+echo $id;
     
 ?>
 
@@ -14,14 +18,21 @@ $singleProduct = $store->getSingleProduct($id);
 </head>
 <body>
     <h1>Edit Product Details</h1>
-    <form action="index.php" method="post">
+    <form method="post">
 
         <h4><?php echo htmlspecialchars($singleProduct['product_name']); ?> </h4> 
-        <!-- <p>Product ID: <?php echo htmlspecialchars($singleProduct['product_id']); ?></p> -->
+       
+
+        <p>Product ID: <?php echo htmlspecialchars($singleProduct['product_id']); ?></p>
+        <input type="hidden" name="productId" id="productId" value="<?php echo htmlspecialchars($singleProduct['product_id']); ?>" >
+
         <p>Category: <?php echo htmlspecialchars($singleProduct['product_type']); ?></p>
-         <p>Quantity Type: <?php echo htmlspecialchars($singleProduct['quantity_type']); ?></p>
+       
+
+        <p>Quantity Type: <?php echo htmlspecialchars($singleProduct['quantity_type']); ?></p>
+       
         
-         <label for="price">Price:</label>
+        <label for="price">Price:</label>
         <input type="number" step="1" name="price" id="price" min="0" value="<?php echo htmlspecialchars($singleProduct['price']); ?>" required><br>
 
         <label for="stockNum">Stock Number:</label>
