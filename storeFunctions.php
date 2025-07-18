@@ -128,12 +128,12 @@
 
                 try{
                     $connection = $this->openConnection();
-                    $stmt = $this->connection->prepare("UPDATE products SET stock_num = :stock_num, price = :price WHERE product_id = product_id");
-                
-                    $stmt->execute([ 
-                        'stock_num'=>$stockNum,
-                        'price'=>$price,
-                        'product_id'=>$productId
+                    $stmt = $this->connection->prepare("UPDATE products SET stock_num = :stock_num, price = :price WHERE product_id = :product_id");
+                                                    
+                    $stmt->execute([
+                        ':stock_num' => $stockNum,
+                        ':price' => $price,
+                        ':product_id' => $productId
                     ]);
 
                     $result = $stmt->rowCount();
@@ -159,10 +159,6 @@
                 
                
                 
-            }
-            else{
-                echo "This is not running";
-
             }
 
         }
