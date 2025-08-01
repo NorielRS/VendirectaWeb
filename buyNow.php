@@ -42,4 +42,4 @@ print_r($result);
 
         <button type="submit" name="buy_now">Buy Now</button>
 
-         <button type="submit" name="add_to_cart">Add to Cart</button>
+         
