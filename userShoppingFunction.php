@@ -49,8 +49,47 @@ require_once 'storeFunctions.php';
                 }
             }
         }
+         public function buyNowWithDetails($productId) {
 
-    }  
+            if (isset($_POST['buy_now_detailed'])) {
+
+                $productId = $_POST['productId'];
+                $product = $this->getSingleProduct($productId);
+                
+                if ($product) {
+                    
+                    $encoded_id = urlencode($productId);
+                    $encoded_stocks_bought = urlencode($_POST['stocks_bought']);                   
+                    header("Location: /Vendirecta/confirmOrder.php?id=$encoded_id,&stocks_bought=$encoded_stocks_bought");
+                    exit;
+
+                } else {
+                    return $this->show404();
+                }
+
+            }
+        } 
+        
+        public function confirmOrder($productId) {
+
+            if (isset($_POST['confirm_order'])) {
+
+                $productId = $_POST['productId'];
+                $product = $this->getSingleProduct($productId);
+                
+                if ($product) {
+
+                    $encoded_id = urlencode($productId);                  
+                    header("Location: /Vendirecta/ordersPage.php?id=$encoded_id");
+                    exit;
+
+                } else {
+                    return $this->show404();
+                }
+
+            }
+        } 
+    }
 
     $userShoppingFunction = new UserShoppingFunction();
 ?>
