@@ -26,7 +26,7 @@
 
             <p>Product ID: <?php echo htmlspecialchars($product['product_id']); ?></p>
             <p>Category: <?php echo htmlspecialchars($product['product_type']); ?></p>
-            <p>Price: <?php echo htmlspecialchars($product['price']. " per ". $product['quantity_type']); ?></p>
+            <p>Price: ₱ <?php echo htmlspecialchars($product['price']. " per ". $product['quantity_type']); ?></p>
             <p>Stocks: <?php echo htmlspecialchars($product['stock_num']); ?></p>
 
              <!-- <a href="<?php echo '/Vendirecta/editProDetails.php?id=' . urlencode($product['product_id']); ?>">

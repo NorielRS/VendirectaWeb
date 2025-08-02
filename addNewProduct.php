@@ -40,7 +40,7 @@
             <option value="Piraso">Piraso</option>
         </select><br>
 
-        <label for="price">Price:</label>
+        <label for="price">Price: ₱</label>
         <input type="number" step="1" name="price" id="price" min="0" value="0" required><br>
 
         <label for="stockNum">Stock Number:</label>

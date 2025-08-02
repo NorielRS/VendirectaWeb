@@ -33,7 +33,7 @@ print_r($result);
 
         <p>Quantity Type: <?php echo htmlspecialchars($singleProduct['quantity_type']); ?></p>
 
-        <p>Price: <?php echo htmlspecialchars($singleProduct['price']); ?></p>
+        <p>Price: ₱ <?php echo htmlspecialchars($singleProduct['price']); ?></p>
 
         <p>Stocks: <?php echo htmlspecialchars($singleProduct['stock_num']); ?></p>
        

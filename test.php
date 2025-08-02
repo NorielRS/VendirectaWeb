@@ -2,38 +2,59 @@
 <html>
 <head>
   <style>
-    .number-selector {
+    .quantity-selector {
+      display: flex;
+      align-items: center;
       font-size: 24px;
+    }
+    .quantity-btn {
+      width: 32px;
+      height: 32px;
+      border: 1px solid #ccc;
+      background: #f8f8f8;
       cursor: pointer;
+      text-align: center;
+      line-height: 32px;
+      font-size: 24px;
       user-select: none;
     }
-    .number {
-      margin: 0 10px;
-      display: inline-block;
-      width: 20px;
+    .quantity-value {
+      width: 40px;
       text-align: center;
+      font-size: 24px;
+      margin: 0 10px;
     }
   </style>
 </head>
 <body>
 
-<div class="number-selector">
-  <span onclick="increase()">&#60;</span> <!-- < symbol -->
-  <span id="number" class="number">8</span>
-  <span onclick="decrease()">&#62;</span> <!-- > symbol -->
+<div class="quantity-selector">
+  <span class="quantity-btn" onclick="decrease()">-</span>
+  <span id="quantity" class="quantity-value">1</span>
+  <span class="quantity-btn" onclick="increase()">+</span>
 </div>
 
 <script>
-  let current = 8;
+  let quantity = 1;
+  const min = 1;
+  const max = 99;
+
+  function updateDisplay() {
+    document.getElementById('quantity').textContent = quantity;
+  }
 
   function increase() {
-    current++;
-    document.getElementById('number').textContent = current;
+    if (quantity < max) {
+      quantity++;
+      updateDisplay();
+    }
   }
 
   function decrease() {
-    current--;
-    document.getElementById('number').textContent = current;
+    if (quantity > min) {
+      quantity--;
+      updateDisplay();
+    }
   }
 </script>
 

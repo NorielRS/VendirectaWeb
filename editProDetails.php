@@ -30,7 +30,7 @@ $store->editProduct($_POST);
         <p>Quantity Type: <?php echo htmlspecialchars($singleProduct['quantity_type']); ?></p>
        
         
-        <label for="price">Price:</label>
+        <label for="price">Price: ₱</label>
         <input type="number" step="1" name="price" id="price" min="0" value="<?php echo htmlspecialchars($singleProduct['price']); ?>" required><br>
 
         <label for="stockNum">Stock Number:</label>
