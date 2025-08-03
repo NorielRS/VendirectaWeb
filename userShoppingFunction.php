@@ -7,6 +7,10 @@ require_once 'storeFunctions.php';
             $this->openConnection();
         }
 
+        
+
+        
+
         public function getSingleProduct($id) {
             $stmt = $this->connection->prepare("SELECT * FROM products WHERE product_id = ?");
             $stmt->execute([$id]);
@@ -60,7 +64,7 @@ require_once 'storeFunctions.php';
                     
                     $encoded_id = urlencode($productId);
                     $encoded_stocks_bought = urlencode($_POST['stocks_bought']);                   
-                    header("Location: /Vendirecta/confirmOrder.php?id=$encoded_id,&stocks_bought=$encoded_stocks_bought");
+                    header("Location: /Vendirecta/Checkout.php?id=$encoded_id,&stocks_bought=$encoded_stocks_bought");
                     exit;
 
                 } else {
@@ -70,18 +74,28 @@ require_once 'storeFunctions.php';
             }
         } 
         
-        public function confirmOrder($productId) {
+        public function checkout($productId) {
 
-            if (isset($_POST['confirm_order'])) {
+            if (isset($_POST['checkout'])) {
 
                 $productId = $_POST['productId'];
+                $totalPrice = $_POST['totalCost'];
+                $userId = 404010;
                 $product = $this->getSingleProduct($productId);
                 
                 if ($product) {
+                    try{
+                        echo $this->addCheckoutToOrders($pdo, $userId, $totalPrice);
 
-                    $encoded_id = urlencode($productId);                  
-                    header("Location: /Vendirecta/ordersPage.php?id=$encoded_id");
-                    exit;
+                    }catch (PDOException $e) {
+                        echo "Error: " . $e->getMessage();
+                    }
+
+
+
+                    // $encoded_id = urlencode($productId);                  
+                    // header("Location: /Vendirecta/ordersPage.php?id=$encoded_id");
+                    // exit;
 
                 } else {
                     return $this->show404();
@@ -89,6 +103,13 @@ require_once 'storeFunctions.php';
 
             }
         } 
+
+        public function addCheckoutToOrders(PDO $pdo, $userId, $totalPrice) {
+            $stmt = $this->connection->prepare("INSERT INTO orders (user_id, total_price) VALUES (?, ?)");
+            $stmt->execute([$userId, $totalPrice]);
+            $returnid = $pdo->lastInsertId();// ERROR
+            return $returnid;
+        }
     }
 
     $userShoppingFunction = new UserShoppingFunction();
