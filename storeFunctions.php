@@ -17,7 +17,7 @@
         public function openConnection() {
             try {
                 $this->connection = new PDO($this->server, $this->user, $this->password, $this->options);
-                //  return $this->$connection;
+                return $this->connection;
 
             } catch (PDOException $e) {
                 echo "Connection failed: " . $e->getMessage();
