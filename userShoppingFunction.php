@@ -80,22 +80,24 @@ require_once 'storeFunctions.php';
 
                 $productId = $_POST['productId'];
                 $totalPrice = $_POST['totalCost'];
-                $userId = 404010;
+                $stocks_bought = $_POST['stocks_bought'];
+                $userId = '404010';                       // Assuming you have a way to get the user ID, replace this with actual user ID retrieval logic
                 $product = $this->getSingleProduct($productId);
                 
                 if ($product) {
                     try{
-                        echo $this->addCheckoutToOrders($pdo, $userId, $totalPrice);
+                        $orderId = $this->addCheckoutToOrders($userId, $totalPrice);
+                        if ($orderId) {
+                            $this->addCheckoutToOrdersItems($orderId, $productId, $stocks_bought, $totalPrice);
+                            echo "Checkout successful! Order ID: " . $orderId;
+                        } else {
+                            echo "Error processing checkout.";
+                        }
+                    
 
                     }catch (PDOException $e) {
                         echo "Error: " . $e->getMessage();
                     }
-
-
-
-                    // $encoded_id = urlencode($productId);                  
-                    // header("Location: /Vendirecta/ordersPage.php?id=$encoded_id");
-                    // exit;
 
                 } else {
                     return $this->show404();
@@ -104,11 +106,20 @@ require_once 'storeFunctions.php';
             }
         } 
 
-        public function addCheckoutToOrders(PDO $pdo, $userId, $totalPrice) {
+        public function addCheckoutToOrders($userId, $totalPrice) {
+            $pdo = $this->openConnection();
+             if (!$pdo) return false;
+
             $stmt = $this->connection->prepare("INSERT INTO orders (user_id, total_price) VALUES (?, ?)");
             $stmt->execute([$userId, $totalPrice]);
-            $returnid = $pdo->lastInsertId();// ERROR
+            $returnid = $pdo->lastInsertId();
             return $returnid;
+        }
+
+         public function addCheckoutToOrdersItems($orderId, $productId, $stocks_bought, $totalPrice) {
+           
+            $stmt = $this->connection->prepare("INSERT INTO order_items (order_id, product_id, quantity, price_at_purchase) VALUES (?, ?, ?, ?)");
+            $stmt->execute([$orderId, $productId, $stocks_bought, $totalPrice]);       
         }
     }
 
