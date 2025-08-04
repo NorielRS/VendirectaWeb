@@ -28,7 +28,8 @@ $totalCost = $price * $stocks_bought;
     
     <form method="post" action="">
         <input type="hidden" name="productId" value="<?php echo htmlspecialchars($singleProduct['product_id']); ?>">
-         <input type="hidden" name="totalCost" value="<?php echo htmlspecialchars($totalCost); ?>">
+        <input type="hidden" name="totalCost" value="<?php echo htmlspecialchars($totalCost); ?>">
+        <input type="hidden" name="stocks_bought" value="<?php echo htmlspecialchars($stocks_bought); ?>">
       
         <button type="submit" name="checkout">CHECKOUT</button>
     </form>
