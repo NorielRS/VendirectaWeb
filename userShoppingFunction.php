@@ -86,7 +86,9 @@ require_once 'storeFunctions.php';
                 
                 if ($product) {
                     try{
-                        $orderId = $this->addCheckoutToOrders($userId, $totalPrice);
+                        $orderId = $this->addCheckoutToOrders($userId, $totalPrice);    // Add the order to the orders table
+                        // If order creation was successful, add the order items
+                        // Assuming addCheckoutToOrdersItems is a method that adds items to the order_items table
                         if ($orderId) {
                             $this->addCheckoutToOrdersItems($orderId, $productId, $stocks_bought, $totalPrice);
                             echo "Checkout successful! Order ID: " . $orderId;
