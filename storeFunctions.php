@@ -164,24 +164,21 @@
         }
 
 
+//This functionS DOING NOTHING CURRENTLY
+        public function deleteProduct($id) {
+            $connection = $this->openConnection();
+            $stmt = $this->connection->prepare("DELETE FROM products WHERE product_id = ?");
+            $stmt->execute([$id]);
+            $result = $stmt->rowCount();
 
+            if ($result > 0) {
+                echo "Product deleted successfully!";
+            } else {
+                echo "Error deleting product.";
+            }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            $this->closeConnection();
+        }
          
         public function getVendor() {
             return $this->vendorId;
