@@ -1,6 +1,5 @@
 <?php
 require_once 'userShoppingFunction.php';
-require_once 'storeFunctions.php';
 $id = $_GET['id'];
 $singleProduct = $store->getSingleProduct($id);
 
