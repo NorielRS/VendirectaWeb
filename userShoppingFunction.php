@@ -7,10 +7,6 @@ require_once 'storeFunctions.php';
             $this->openConnection();
         }
 
-        
-
-        
-
         public function getSingleProduct($id) {
             $stmt = $this->connection->prepare("SELECT * FROM products WHERE product_id = ?");
             $stmt->execute([$id]);
@@ -71,8 +67,8 @@ require_once 'storeFunctions.php';
                     return $this->show404();
                 }
 
-            }
-        } 
+              }
+            } 
         
         public function checkout($productId) {
 
@@ -86,7 +82,7 @@ require_once 'storeFunctions.php';
                 $orderStatus = 'Pending'; // Default order status
                 // $product = $this->getSingleProduct($productId);
                 
-                // if ($product) {
+
                     try{
                         // Add the order to the orders table
                         $orderId = $this->addCheckoutToOrders($userId, $totalPrice,$orderStatus);    
@@ -108,9 +104,7 @@ require_once 'storeFunctions.php';
                         return "Error: " . $e->getMessage();
                     }
 
-                // } else {
-                //     return $this->show404();
-                // }
+
 
             }
         } 
