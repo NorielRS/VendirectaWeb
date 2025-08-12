@@ -1,4 +1,6 @@
 <?php
+    session_start();
+    $_SESSION['user_id'] = '404010'; // Example user ID, replace with actual session management
     class AddToCartFunctions extends UserShoppingFunction {
 
         public function __construct() {
