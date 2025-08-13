@@ -1,7 +1,9 @@
 <?php
-    require_once 'storeFunctions.php';
+require_once 'storeFunctions.php';
+require_once 'userShoppingFunction.php';
    
-    $products = $store->getProducts();
+$products = $store->getProducts();
+$userShoppingFunction->goToOrdersAndCart($_POST);
 
     
   
@@ -16,6 +18,11 @@
 </head>
 <body>
     <h1>Vendirecta</h1>
+    <form method="post">
+        <button type="submit" name="goto_orders">Orders</button>
+
+        <button type="submit" name="goto_cart">Cart</button>
+
     <h2>Products:</h2>
     
         <?php foreach ($products as $product): ?>
@@ -29,13 +36,6 @@
             <p>Price: ₱ <?php echo htmlspecialchars($product['price']. " per ". $product['quantity_type']); ?></p>
             <p>Stocks: <?php echo htmlspecialchars($product['stock_num']); ?></p>
 
-             <!-- <a href="<?php echo '/Vendirecta/editProDetails.php?id=' . urlencode($product['product_id']); ?>">
-                <?php echo "BUY NOW"; ?>
-            </a></br>
-
-            <a href="<?php echo '/Vendirecta/editProDetails.php?id=' . urlencode($product['product_id']); ?>">
-                <?php echo "ADD TO CART"; ?>
-            </a> -->
         
             <hr>
            
