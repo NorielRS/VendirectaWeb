@@ -149,6 +149,19 @@ require_once 'storeFunctions.php';
             }
         }
 
+        public function goToOrdersAndCart($postData) {
+            if (isset($postData['goto_orders'])) {
+                header("Location: /Vendirecta/orders.php");
+                exit;
+            } elseif (isset($postData['goto_cart'])) {
+                header("Location: /Vendirecta/cart.php");
+                exit;
+            }
+        }
+
+        public function getCart($userId) { 
+        }
+
 
 
 

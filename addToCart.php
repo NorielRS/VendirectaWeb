@@ -6,6 +6,7 @@ $singleProduct = $store->getSingleProduct($id);
 $result = $userShoppingFunction->buyNow($_POST);
 $userShoppingFunction->buyNowWithDetails($_POST);
 $addToCartWithDetails = $addToCartFunctions->addToCartWithDetails($_POST);
+$userId = $userSession->getUserId();
 
 // print_r($singleProduct);
 echo '<br>';
@@ -30,6 +31,8 @@ print_r($addToCartWithDetails);
 
         <!-- <p>Product ID: <?php echo htmlspecialchars($singleProduct['product_id']); ?></p> -->
         <input type="hidden" name="productId" id="productId" value="<?php echo htmlspecialchars($singleProduct['product_id']); ?>" >
+
+        <input type="hidden" name="userId" id="userId" value="<?php echo htmlspecialchars($userId); ?>" >
 
         <!-- <p>Category: <?php echo htmlspecialchars($singleProduct['product_type']); ?></p> -->
 

@@ -1,11 +1,12 @@
 <?php
 require_once 'userShoppingFunction.php';
 require_once 'addToCartFunctions.php';
-$id = $_GET['id'];
-$singleProduct = $store->getSingleProduct($id);
- $userId = '404010';
 
-$price = $singleProduct['price']; // price per product
+ $products = $store->getProducts();
+
+$userId = $userSession->getUserId(); // Assuming you have a way to get the user ID, replace this with actual user ID retrieval logic
+
+$cart_items = $userShoppingFunction->getOrders($userId);
 
 ?>
 
@@ -19,18 +20,18 @@ $price = $singleProduct['price']; // price per product
     <h1>Cart</h1>
    <h2>Cart:</h2>
     
-        <?php foreach ($orders as $order): ?>
-            <div class="order-item">
-            <h4><a href="<?php echo '/Vendirecta/itemShowUser.php?id=' . urlencode($order['product_id'] ?? ''); ?>">
-                <?php echo htmlspecialchars($order['product_name'] ?? ''); ?>
+        <?php foreach ($cart_items as $cart_item): ?>
+            <div class="cart_item-item">
+            <h4><a href="<?php echo '/Vendirecta/itemShowUser.php?id=' . urlencode($cart_item['product_id'] ?? ''); ?>">
+                <?php echo htmlspecialchars($cart_item['product_name'] ?? ''); ?>
             </a></h4>
 
-            <p><?php htmlspecialchars($order['product_id'] ?? ''); ?></p>
-            <p>Order ID: <?php echo htmlspecialchars($order['order_id'] ?? ''); ?></p>
-            <p>Order Date: <?php echo htmlspecialchars($order['created_at'] ?? ''); ?></p>
-            <p>Order Status: <?php echo htmlspecialchars($order['order_status'] ?? ''); ?></p>
-            <p>Order Quantity: <?php echo htmlspecialchars($order['order_quantity'] ?? ''); ?></p>
-            <p>Total Amount: ₱ <?php echo htmlspecialchars($order['total_amount'] ?? ''); ?></p>
+            <p><?php htmlspecialchars($cart_item['product_id'] ?? ''); ?></p>
+            <p>Order ID: <?php echo htmlspecialchars($cart_item['order_id'] ?? ''); ?></p>
+            <p>Order Date: <?php echo htmlspecialchars($cart_item['created_at'] ?? ''); ?></p>
+            <p>Order Status: <?php echo htmlspecialchars($cart_item['order_status'] ?? ''); ?></p>
+            <p>Order Quantity: <?php echo htmlspecialchars($cart_item['order_quantity'] ?? ''); ?></p>
+            <p>Total Amount: ₱ <?php echo htmlspecialchars($cart_item['total_amount'] ?? ''); ?></p>
 
             <hr>
             </div>

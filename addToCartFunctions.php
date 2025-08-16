@@ -2,7 +2,7 @@
 
 require_once 'userShoppingFunction.php';
 
-    $_SESSION['user_id'] = '404010'; // Example user ID, replace with actual session management
+
     class AddToCartFunctions extends UserShoppingFunction {
 
         public function __construct() {
@@ -19,7 +19,7 @@ require_once 'userShoppingFunction.php';
 
                 $productId = $_POST['productId'];
                 $stocks_added = $_POST['stocks_added'];
-                $userId = '404010';                       //$_SESSION['user_id'];                  // Assuming you have a way to get the user ID, replace this with actual user ID retrieval logic
+                $userId = $_POST['userId'];                     //$_SESSION['user_id'];                  // Assuming you have a way to get the user ID, replace this with actual user ID retrieval logic
                 $orderStatus = 'Pending';
                 $product = $this->getSingleProduct($productId);
                 
@@ -59,6 +59,7 @@ require_once 'userShoppingFunction.php';
             $stmt = $this->connection->prepare("INSERT INTO cart_items (cart_item_id, product_id, quantity) VALUES (?, ?, ?)");
             $stmt->execute([$cart_item_id, $product_id, $stocks_added]);       
         }
+        
 
     }
     $addToCartFunctions = new AddToCartFunctions();

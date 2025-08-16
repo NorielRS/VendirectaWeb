@@ -1,8 +1,10 @@
 
 
 <?php
-    session_start();
-    class StoreFunctions {
+
+require_once 'userAuth&SessionUser.php';
+    
+    class StoreFunctions extends UserSession {
 
         private $server = "mysql:host=localhost;port=3307;dbname=vendirecta-db";
         private $user = "root";
