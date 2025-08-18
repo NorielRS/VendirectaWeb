@@ -96,7 +96,8 @@ require_once 'userShoppingFunction.php';
                 FROM cart c 
                 JOIN cart_items ci ON c.id = ci.cart_id
                 JOIN products p ON ci.product_id = p.product_id
-                WHERE c.id = ?");
+                WHERE c.id = ?
+                ORDER BY ci.id DESC");
                 
             $stmt->execute([$cart_id]);
             $cartItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
