@@ -8,6 +8,12 @@ $userId = $userSession->getUserId(); // Assuming you have a way to get the user 
 
 $cart_items = $userShoppingFunction->getOrders($userId);
 
+$addToCartFunctions->openCart();
+
+$cart_items = $addToCartFunctions->getCartItems($_SESSION['cart_id']);
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -27,11 +33,10 @@ $cart_items = $userShoppingFunction->getOrders($userId);
             </a></h4>
 
             <p><?php htmlspecialchars($cart_item['product_id'] ?? ''); ?></p>
-            <p>Order ID: <?php echo htmlspecialchars($cart_item['order_id'] ?? ''); ?></p>
-            <p>Order Date: <?php echo htmlspecialchars($cart_item['created_at'] ?? ''); ?></p>
-            <p>Order Status: <?php echo htmlspecialchars($cart_item['order_status'] ?? ''); ?></p>
-            <p>Order Quantity: <?php echo htmlspecialchars($cart_item['order_quantity'] ?? ''); ?></p>
-            <p>Total Amount: ₱ <?php echo htmlspecialchars($cart_item['total_amount'] ?? ''); ?></p>
+            
+            <p>Cart ID: <?php echo htmlspecialchars($cart_item['cart_id'] ?? ''); ?></p>
+            <p>Quantity: <?php echo htmlspecialchars($cart_item['quantity'] ?? ''); ?></p>
+            <p>Price: ₱ <?php echo htmlspecialchars($cart_item['price'] ?? ''); ?></p>
 
             <hr>
             </div>
