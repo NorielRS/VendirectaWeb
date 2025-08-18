@@ -6,6 +6,8 @@
     $userId = $userSession->getUserId(); // Assuming you have a way to get the user ID, replace this with actual user ID retrieval logic
 
     $orders = $userShoppingFunction->getOrders($userId);
+    
+    print_r('Current UserID: '.$userId);
 
 
 ?>
